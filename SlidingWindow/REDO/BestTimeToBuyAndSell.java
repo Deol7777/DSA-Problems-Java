@@ -1,5 +1,4 @@
 package SlidingWindow.REDO;
-import java.util.Arrays;
 
 public class BestTimeToBuyAndSell {
         public static void main(String[] args) {
