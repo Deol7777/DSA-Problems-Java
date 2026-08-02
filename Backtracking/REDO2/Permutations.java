@@ -49,28 +49,54 @@ public class Permutations {
         return out;
     }
 
+    HashSet<Integer> set = new HashSet<>();
+
     Queue<Integer> queue = new LinkedList<>();
     List<Integer> temp = new ArrayList<>();
     List<List<Integer>> sol = new ArrayList<>();
 
+    // The commented out solution is a little better. more clever as it only needs a
+    // queue
+
+    // public List<List<Integer>> permute(int[] nums) {
+    // for (int i : nums) {
+    // queue.add(i);
+    // }
+    // permuteHelper(nums);
+
+    // return sol;
+    // }
+
+    // private void permuteHelper(int[] nums) {
+    // if (queue.size() == 0)
+    // sol.add(new ArrayList<>(temp));
+    // for (int i = 0; i < queue.size(); i++) {
+    // int cur = queue.poll();
+    // temp.add(cur);
+    // permuteHelper(nums);
+    // temp.remove(temp.size() - 1);
+    // queue.add(cur);
+    // }
+    // }
+
     public List<List<Integer>> permute(int[] nums) {
-        for (int i : nums) {
-            queue.add(i);
-        }
         permuteHelper(nums);
 
         return sol;
     }
 
     private void permuteHelper(int[] nums) {
-        if (queue.size() == 0)
+        if (set.size() == nums.length)
             sol.add(new ArrayList<>(temp));
-        for (int i = 0; i < queue.size(); i++) {
-            int cur = queue.poll();
-            temp.add(cur);
+        for (int i = 0; i < nums.length; i++) {
+            if (set.contains(nums[i]))
+                continue;
+            set.add(nums[i]);
+            temp.add(nums[i]);
             permuteHelper(nums);
+            set.remove(nums[i]);
             temp.remove(temp.size() - 1);
-            queue.add(cur);
         }
     }
+
 }
